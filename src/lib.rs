@@ -133,7 +133,7 @@ impl<I2C: I2c> Tca9535<I2C> {
         register_pair: RegisterPair,
         data: u16,
     ) -> Result<(), I2C::Error> {
-        let bytes: [u8; 2] = data.to_be_bytes();
+        let bytes: [u8; 2] = data.to_le_bytes();
         self.i2c
             .write(self.address.into(), &[u8::from(register_pair), bytes[0]])
             .await?;
